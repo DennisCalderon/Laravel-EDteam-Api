@@ -14,7 +14,11 @@ class PrecioController extends Controller
      */
     public function index() // nos permite consultar/mostrar todos los precios de nuestra base de datos
     {
-        return Precio::all(); // consulta todos los precios a la base datos
+        $precios = Precio::all(); // consulta todos los precios a la base datos
+        return response()->json([ // Respuesta personalizada
+            "data" => $precios,
+            "status" => 200
+        ], 200);
     }
 
     /**
@@ -36,7 +40,11 @@ class PrecioController extends Controller
     public function store(Request $request) // método para almacenar la información en la base de datos
     {
         $precio = Precio::create($request->all()); // crear un precio en la base de datos
-        return $precio;
+        return response()->json([
+            "message" => "El precio ha sido creado correctamente",
+            "data" => $precio,
+            "status" => 202
+        ], 202);
     }
 
     /**
