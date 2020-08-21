@@ -70,7 +70,8 @@ class PrecioController extends Controller
      */
     public function update(Request $request, Precio $precio) // nos permite recibir una información y con eso actualizar un dato
     {
-        //
+        $precio->update($request->all());
+        return $precio;
     }
 
     /**
@@ -81,6 +82,7 @@ class PrecioController extends Controller
      */
     public function destroy(Precio $precio) // para destruir algún dato
     {
-        //
+        $precio->delete();
+        return $precio;
     }
 }
