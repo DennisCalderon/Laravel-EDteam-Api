@@ -12,9 +12,9 @@ class PrecioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() // nos permite consultar/mostrar todos los precios de nuestra base de datos
     {
-        //
+        return Precio::all(); // consulta todos los precios a la base datos
     }
 
     /**
@@ -22,7 +22,7 @@ class PrecioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create() // nativamente de laravel nos permite crear un formulario para crear un precio
     {
         //
     }
@@ -33,9 +33,10 @@ class PrecioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) // método para almacenar la información en la base de datos
     {
-        //
+        $precio = Precio::create($request->all()); // crear un precio en la base de datos
+        return $precio;
     }
 
     /**
@@ -44,9 +45,9 @@ class PrecioController extends Controller
      * @param  \App\Precio  $precio
      * @return \Illuminate\Http\Response
      */
-    public function show(Precio $precio)
+    public function show(Precio $precio) // método para mostrar un precio
     {
-        //
+        return $precio; // para mostrar un precio
     }
 
     /**
@@ -55,7 +56,7 @@ class PrecioController extends Controller
      * @param  \App\Precio  $precio
      * @return \Illuminate\Http\Response
      */
-    public function edit(Precio $precio)
+    public function edit(Precio $precio) // nos permite crear un formulario para poder editar un contenido
     {
         //
     }
@@ -67,7 +68,7 @@ class PrecioController extends Controller
      * @param  \App\Precio  $precio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Precio $precio)
+    public function update(Request $request, Precio $precio) // nos permite recibir una información y con eso actualizar un dato
     {
         //
     }
@@ -78,7 +79,7 @@ class PrecioController extends Controller
      * @param  \App\Precio  $precio
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Precio $precio)
+    public function destroy(Precio $precio) // para destruir algún dato
     {
         //
     }
