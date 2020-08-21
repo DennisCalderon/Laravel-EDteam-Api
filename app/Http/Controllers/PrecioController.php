@@ -17,8 +17,8 @@ class PrecioController extends Controller
         $precios = Precio::all(); // consulta todos los precios a la base datos
         return response()->json([ // Respuesta personalizada
             "data" => $precios,
-            "status" => 200
-        ], 200);
+            "status" => Response::HTTP_OK
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -43,8 +43,8 @@ class PrecioController extends Controller
         return response()->json([
             "message" => "El precio ha sido creado correctamente",
             "data" => $precio,
-            "status" => 202
-        ], 202);
+            "status" => Response::HTTP_CREATED
+        ], Response::HTTP_CREATED);
     }
 
     /**
@@ -55,7 +55,12 @@ class PrecioController extends Controller
      */
     public function show(Precio $precio) // método para mostrar un precio
     {
-        return $precio; // para mostrar un precio
+        //return $precio; // para mostrar un precio
+        return response()->json([
+            "message" => "El precio ha sido creado correctamente",
+            "data" => $precio,
+            "status" => Response::HTTP_OK
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -79,7 +84,11 @@ class PrecioController extends Controller
     public function update(Request $request, Precio $precio) // nos permite recibir una información y con eso actualizar un dato
     {
         $precio->update($request->all());
-        return $precio;
+        return response()->json([
+            "message" => "El precio ha sido creado correctamente",
+            "data" => $precio,
+            "status" => Response::HTTP_OK
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -91,6 +100,10 @@ class PrecioController extends Controller
     public function destroy(Precio $precio) // para destruir algún dato
     {
         $precio->delete();
-        return $precio;
+        return response()->json([
+            "message" => "El precio ha sido creado correctamente",
+            "data" => $precio,
+            "status" => Response::HTTP_OK
+        ], Response::HTTP_OK);
     }
 }
