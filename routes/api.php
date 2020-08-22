@@ -20,3 +20,5 @@ use Illuminate\Http\Request;
 
 Route::apiResource('/precios', 'PrecioController');
 Route::apiResource('/empresas', 'EmpresaController');
+Route::apiResource('/alumnos', 'AlumnoController');
+Route::apiResource('/pagos', 'PagoController');

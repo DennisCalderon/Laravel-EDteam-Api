@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Alumno;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class AlumnoController extends Controller
 {
@@ -14,17 +15,11 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $alumnos = Alumno::all(); // consulta todos los precios a la base datos
+        return response()->json([ // Respuesta personalizada
+            "data" => $alumnos,
+            "status" => Response::HTTP_OK
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -35,7 +30,12 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $alumno = Alumno::create($request->all()); // crear un precio en la base de datos
+        return response()->json([
+            "message" => "El Alumno ha sido creado correctamente",
+            "data" => $alumno,
+            "status" => Response::HTTP_CREATED
+        ], Response::HTTP_CREATED);
     }
 
     /**
@@ -46,18 +46,10 @@ class AlumnoController extends Controller
      */
     public function show(Alumno $alumno)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Alumno  $alumno
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Alumno $alumno)
-    {
-        //
+        return response()->json([
+            "data" => $alumno,
+            "status" => Response::HTTP_OK
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -69,7 +61,12 @@ class AlumnoController extends Controller
      */
     public function update(Request $request, Alumno $alumno)
     {
-        //
+        $alumno->update($request->all());
+        return response()->json([
+            "message" => "El Alumno ha sido actualizado correctamente",
+            "data" => $alumno,
+            "status" => Response::HTTP_OK
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -80,6 +77,11 @@ class AlumnoController extends Controller
      */
     public function destroy(Alumno $alumno)
     {
-        //
+        $alumno->delete();
+        return response()->json([
+            "message" => "El Alumno ha sido eliminado correctamente",
+            "data" => $alumno,
+            "status" => Response::HTTP_OK
+        ], Response::HTTP_OK);
     }
 }
