@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Alumno;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Empresa;
 
 class AlumnoController extends Controller
 {
@@ -46,8 +47,10 @@ class AlumnoController extends Controller
      */
     public function show(Alumno $alumno)
     {
+        $empresa = Empresa::findOrFail($alumno->idCompany); // buscame o falla; este método busca en la base de datos un objeto(ID en este caso)
         return response()->json([
-            "data" => $alumno,
+            "alumno" => $alumno,
+            "empresa" => $empresa,
             "status" => Response::HTTP_OK
         ], Response::HTTP_OK);
     }
