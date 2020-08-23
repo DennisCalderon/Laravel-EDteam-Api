@@ -162,6 +162,9 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        //Agregando la libreria de Laravel/Passport
+        Laravel\Passport\PassportServiceProvider::class,
+
         /*
          * Package Service Providers...
          */

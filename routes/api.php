@@ -18,7 +18,10 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::apiResource('/precios', 'PrecioController');
-Route::apiResource('/empresas', 'EmpresaController');
-Route::apiResource('/alumnos', 'AlumnoController');
-Route::apiResource('/pagos', 'PagoController');
+// ahora si hacemos uso de un middleware para controlar el acceso a los recursos de la API
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::apiResource('/precios', 'PrecioController');
+    Route::apiResource('/empresas', 'EmpresaController');
+    Route::apiResource('/alumnos', 'AlumnoController');
+    Route::apiResource('/pagos', 'PagoController');
+});
