@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
+Route::post('/login', 'UserController@login');
+
 // ahora si hacemos uso de un middleware para controlar el acceso a los recursos de la API
 Route::group(['middleware' => 'auth:api'], function(){
     Route::apiResource('/precios', 'PrecioController');
