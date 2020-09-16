@@ -15,7 +15,12 @@ class UserController extends Controller
             'password' => request('password') // recibe el parámetro del Post
         ];
         if (Auth::attempt($data)){ // esto devuelve Tru o False
-            return response()->json("bienvenido", 200);
+            $user = Auth::user(); // leemos el usuario que acaba de ser logeado
+            $loginData['token'] = $user->createToken('EDtoken')->accessToken; // le devolvemos un token de acceso para que este usuario pueda ingresar siempre
+            return response()->json([
+                "data" => $loginData,
+                "message" => "Bienvenido"
+            ], 200);
         } else {
             return response()->json([
                 "mensaje" => "Error en el login"
