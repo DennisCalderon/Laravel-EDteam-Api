@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; //agregando dependencia de la Clase: Auth
 use Illuminate\Http\Response; //dependencia del método responce();
 
+use App\User;
+
 class UserController extends Controller
 {
     public function login() {
@@ -26,5 +28,19 @@ class UserController extends Controller
                 "mensaje" => "Error en el login"
             ], 401);
         }
+    }
+
+    public function register(Request $request) {
+        $data = $request->all();
+        // return $data['password'] = bcrypt($data['password']); //bcrypt () , se usa para encryptar contraseñas
+        $data['password'] = bcrypt($data['password']);
+
+        $user = User::create($data); // para crear el usuario
+
+        $loginData['token'] = $user->createToken('EDtoken')->accessToken; // le devolvemos un token de acceso para que este usuario pueda ingresar siempre
+        return response()->json([
+            "message" => "Bienvenido nuevo usuario",
+            "data" => $loginData,
+        ], 200);
     }
 }
